@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
+        <module name="config-server" />
         <module name="service-registry" />
       </profile>
       <profile name="Annotation profile for reader-service" enabled="true">
@@ -21,15 +22,22 @@
         <module name="authentication-service" />
         <module name="user-service" />
         <module name="reader-service" />
+        <module name="notification-service" />
         <module name="document-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kafka-service" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="authentication-service" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="document-service" options="-parameters" />
+      <module name="kafka-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
       <module name="reader-request-Service" options="-parameters" />
       <module name="reader-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />

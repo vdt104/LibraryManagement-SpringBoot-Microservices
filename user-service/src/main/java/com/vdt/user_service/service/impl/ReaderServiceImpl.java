@@ -5,8 +5,10 @@ import com.vdt.user_service.dto.ReaderDTO;
 import com.vdt.user_service.entity.Reader;
 import com.vdt.user_service.entity.Role;
 import com.vdt.user_service.entity.User;
+import com.vdt.user_service.event.CreateReaderEvent;
 import com.vdt.user_service.exception.EmailAlreadyExistsException;
 import com.vdt.user_service.exception.ResourceNotFoundException;
+import com.vdt.user_service.kafka.CreateReaderProducer;
 import com.vdt.user_service.mapper.ReaderMapper;
 import com.vdt.user_service.repository.ReaderRepository;
 import com.vdt.user_service.repository.UserRepository;
@@ -27,6 +29,8 @@ public class ReaderServiceImpl implements ReaderService {
     private final ReaderRepository readerRepository;
 
     private final RestTemplate restTemplate;
+
+    private final CreateReaderProducer createReaderProducer;
 
     @Override
     public ReaderDTO getReaderById(String userId) {
@@ -56,6 +60,9 @@ public class ReaderServiceImpl implements ReaderService {
         reader.setUser(user);
 
         Reader savedReader = readerRepository.save(reader);
+
+        CreateReaderEvent createReaderEvent = new CreateReaderEvent("A guest has requested to become a reader", savedReader);
+        createReaderProducer.sendMessage(createReaderEvent);
 
         ReaderCardDTO readerCardDTO = ReaderCardDTO.builder()
                 .userId(savedReader.getUser().getId())

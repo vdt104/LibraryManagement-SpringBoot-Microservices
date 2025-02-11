@@ -26,7 +26,7 @@ public class ReaderCardServiceImpl implements ReaderCardService {
     @Override
     public ReaderCardDTO createReaderCard(ReaderCardDTO readerCardDTO) {
 
-        ReaderDTO readerDTO = restTemplate.getForObject("http://localhost:8080/api/v1/readers/" + readerCardDTO.getUserId(), ReaderDTO.class);
+        ReaderDTO readerDTO = restTemplate.getForObject("http://user-service/api/v1/readers/" + readerCardDTO.getUserId(), ReaderDTO.class);
 
         Reader reader = Reader.builder()
                 .userId(readerCardDTO.getUserId())
