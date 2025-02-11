@@ -63,7 +63,7 @@ public class ReaderServiceImpl implements ReaderService {
                 .status("REQUESTED")
                 .build();
         
-        restTemplate.postForObject("http://localhost:8090/api/v1/reader_cards", readerCardDTO, ReaderCardDTO.class);
+        restTemplate.postForObject("http://reader-service/api/v1/reader_cards", readerCardDTO, ReaderCardDTO.class);
 
         return ReaderMapper.toDTO(savedReader);
     }

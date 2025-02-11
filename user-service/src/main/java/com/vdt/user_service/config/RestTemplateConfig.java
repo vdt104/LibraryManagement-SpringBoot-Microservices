@@ -1,4 +1,4 @@
-package com.vdt.reader_service.config;
+package com.vdt.user_service.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
