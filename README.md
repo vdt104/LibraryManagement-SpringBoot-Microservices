@@ -24,3 +24,7 @@ The system adopts a **Microservices Architecture**, which divides functionalitie
 - **Microservices Architecture**: Divides the system into small, independent services for better scalability and maintainability.
 - **Docker**: Containerize services for easy deployment and management.
 - **Database**: Use MySQL and MongoDB to store data.
+
+## Database Schema
+Here is the database schema for the project (from the Monolithic Architecture version):
+![LM](https://github.com/user-attachments/assets/6e955a11-c252-4a71-ac4d-c57d7ccca6d9)
