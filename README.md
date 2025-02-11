@@ -11,7 +11,7 @@ The system adopts a **Microservices Architecture**, which divides functionalitie
 - **API Gateway**: Acts as the entry point of the system, routing user requests to the corresponding services.
 - **Config Server**: Manages centralized configurations for all services.
 - **Document Service**: Manages books and other library documents.
-- **Notification Service**: Handles user notifications.
+- **Notification Service**: Handles notifications.
 - **Reader Request Service**: Manages book borrowing requests from users.
 - **Reader Service**: Manages reader information.
 - **Service Registry**: Facilitates service registration and discovery.
