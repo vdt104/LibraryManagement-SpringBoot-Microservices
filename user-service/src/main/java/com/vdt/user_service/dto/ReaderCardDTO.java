@@ -21,7 +21,6 @@ public class ReaderCardDTO {
     @JsonProperty("user_id")
     private String userId;
 
-    @JsonIgnore
     private String pin;
 
     @JsonProperty("issue_date")

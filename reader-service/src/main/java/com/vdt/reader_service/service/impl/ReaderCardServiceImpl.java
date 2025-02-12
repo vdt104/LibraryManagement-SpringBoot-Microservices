@@ -11,6 +11,7 @@ import com.vdt.reader_service.service.ReaderCardService;
 import lombok.RequiredArgsConstructor;
 
 import com.vdt.reader_service.entity.Reader;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,6 +34,17 @@ public class ReaderCardServiceImpl implements ReaderCardService {
     }
 
     @Override
+    public ReaderCardDTO getReaderCardByReaderId(String readersId) {
+        Reader existingReader = readerRepository.findById(readersId)
+            .orElseThrow(() -> new ResourceNotFoundException("Reader", "id", readersId));
+
+        ReaderCard readerCard = readerCardRepository.findByUserId(existingReader.getUserId())
+            .orElseThrow(() -> new ResourceNotFoundException("ReaderCard", "userId", existingReader.getUserId()));
+
+        return ReaderCardMapper.toDTO(readerCard);
+    }
+
+    @Override
     public ReaderCardDTO createReaderCard(ReaderCardDTO readerCardDTO) {
 
         ReaderDTO readerDTO = restTemplate.getForObject("http://user-service/api/v1/readers/" + readerCardDTO.getUserId(), ReaderDTO.class);
@@ -46,7 +58,47 @@ public class ReaderCardServiceImpl implements ReaderCardService {
         
         ReaderCard readerCard = ReaderCardMapper.toEntity(readerCardDTO);
 
-        readerCard.setReader(reader);
+        // readerCard.setUserId(reader.getUserId());
+
+        readerCard = readerCardRepository.save(readerCard);
+
+        return ReaderCardMapper.toDTO(readerCard);
+    }
+
+    @Override
+    public ReaderCardDTO updateReaderCard(String cardId, ReaderCardDTO readerCardDTO) {
+        ReaderCard readerCard = readerCardRepository.findById(cardId)
+            .orElseThrow(() -> new ResourceNotFoundException("ReaderCard", "cardId", cardId));
+
+        readerCard.setPin(readerCardDTO.getPin() != null ? readerCardDTO.getPin() : readerCard.getPin());
+        readerCard.setIssueDate(readerCardDTO.getIssueDate() != null ? readerCardDTO.getIssueDate() : readerCard.getIssueDate());
+        readerCard.setExpiryPeriod(readerCardDTO.getExpiryPeriod() != 0 ? readerCardDTO.getExpiryPeriod() : readerCard.getExpiryPeriod());
+        readerCard.setStatus(readerCardDTO.getStatus() != null ? ReaderCard.Status.valueOf(readerCardDTO.getStatus()) : readerCard.getStatus());
+
+        readerCard = readerCardRepository.save(readerCard);
+
+        return ReaderCardMapper.toDTO(readerCard);
+    }
+
+    @Override
+    public ReaderCardDTO updateReaderCardByReaderId(String readersId, ReaderCardDTO readerCardDTO) {
+        Reader existingReader = readerRepository.findById(readersId)
+            .orElseThrow(() -> new ResourceNotFoundException("Reader", "id", readersId));
+
+        ReaderCard readerCard = readerCardRepository.findByUserId(existingReader.getUserId())
+            .orElseThrow(() -> new ResourceNotFoundException("ReaderCard", "userId", existingReader.getUserId()));
+
+        // // if (readerCard.getCreatedAt() = readerCard.getUpdatedAt()) => generate new pin
+        // if (readerCard.getCreatedAt().equals(readerCard.getUpdatedAt())) {
+        //     readerCard.setPin(generateRandomPin());
+        // } else {
+        //     readerCard.setPin(readerCardDTO.getPin() != null ? readerCardDTO.getPin() : readerCard.getPin());
+        // }
+
+        readerCard.setPin(readerCardDTO.getPin() != null ? readerCardDTO.getPin() : readerCard.getPin());
+        readerCard.setIssueDate(readerCardDTO.getIssueDate() != null ? readerCardDTO.getIssueDate() : readerCard.getIssueDate());
+        readerCard.setExpiryPeriod(readerCardDTO.getExpiryPeriod() != 0 ? readerCardDTO.getExpiryPeriod() : readerCard.getExpiryPeriod());
+        readerCard.setStatus(readerCardDTO.getStatus() != null ? ReaderCard.Status.valueOf(readerCardDTO.getStatus()) : readerCard.getStatus());
 
         readerCard = readerCardRepository.save(readerCard);
 

@@ -8,7 +8,7 @@ public class ReaderCardMapper {
     public static ReaderCardDTO toDTO(ReaderCard readerCard) {
         ReaderCardDTO readerCardDTO = new ReaderCardDTO();
 
-        readerCardDTO.setUserId(readerCard.getReader().getUserId());
+        readerCardDTO.setUserId(readerCard.getUserId());
         readerCardDTO.setPin(readerCard.getPin());
         readerCardDTO.setIssueDate(readerCard.getIssueDate());
         readerCardDTO.setExpiryPeriod(readerCard.getExpiryPeriod());

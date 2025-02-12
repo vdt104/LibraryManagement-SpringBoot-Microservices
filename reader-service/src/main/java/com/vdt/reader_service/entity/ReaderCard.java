@@ -3,8 +3,6 @@ package com.vdt.reader_service.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -33,9 +31,8 @@ public class ReaderCard extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Reader reader;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
     @Column(name = "pin")
     private String pin;
