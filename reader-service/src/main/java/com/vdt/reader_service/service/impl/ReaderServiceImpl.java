@@ -1,15 +1,9 @@
 package com.vdt.reader_service.service.impl;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,15 +13,14 @@ import com.vdt.reader_service.dto.ReaderDTO;
 import com.vdt.reader_service.dto.UserDTO;
 import com.vdt.reader_service.entity.Reader;
 import com.vdt.reader_service.entity.ReaderCard;
-// import com.vdt.reader_service.event.CreateReaderEvent;
-// import com.vdt.reader_service.kafka.CreateReaderProducer;
+import com.vdt.reader_service.event.CreateReaderEvent;
 import com.vdt.reader_service.exception.ResourceNotFoundException;
+import com.vdt.reader_service.kafka.CreateReaderProducer;
 import com.vdt.reader_service.mapper.ReaderCardMapper;
 import com.vdt.reader_service.mapper.ReaderMapper;
 import com.vdt.reader_service.repository.ReaderCardRepository;
 import com.vdt.reader_service.repository.ReaderRepository;
 import com.vdt.reader_service.response.UserResponse;
-import com.vdt.reader_service.service.ReaderCardService;
 import com.vdt.reader_service.service.ReaderService;
 
 import lombok.RequiredArgsConstructor;
@@ -42,7 +35,7 @@ public class ReaderServiceImpl implements ReaderService {
 
     private final RestTemplate restTemplate;
 
-    // private final CreateReaderProducer createReaderProducer;
+    private final CreateReaderProducer createReaderProducer;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -124,8 +117,8 @@ public class ReaderServiceImpl implements ReaderService {
 
         // Reader savedReader = readerRepository.save(reader);
 
-        // CreateReaderEvent createReaderEvent = new CreateReaderEvent("A guest has requested to become a reader", savedReader);
-        // createReaderProducer.sendMessage(createReaderEvent);
+        CreateReaderEvent createReaderEvent = new CreateReaderEvent("A guest has requested to become a reader", createdUserId);
+        createReaderProducer.sendMessage(createReaderEvent);
 
         ReaderCardDTO readerCardDTO = ReaderCardDTO.builder()
                 .userId(createdUserId)

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.vdt.notification_service.dto.NotificationDTO;
 import com.vdt.notification_service.entity.Notification;
 import com.vdt.notification_service.mapper.NotificationMapper;
-import com.vdt.notification_service.repostiory.NotificationRepository;
+import com.vdt.notification_service.repository.NotificationRepository;
 import com.vdt.notification_service.service.NotificationService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,5 +24,4 @@ public class NotificationServiceImpl implements NotificationService {
  
         return NotificationMapper.toDTO(notification); 
     }
-
 }
