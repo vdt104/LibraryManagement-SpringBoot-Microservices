@@ -4,4 +4,6 @@ import com.vdt.reader_service.dto.ReaderCardDTO;
 
 public interface ReaderCardService {
     ReaderCardDTO createReaderCard(ReaderCardDTO readerCardDTO);
+
+    ReaderCardDTO getReaderCard(String cardId);
 }
