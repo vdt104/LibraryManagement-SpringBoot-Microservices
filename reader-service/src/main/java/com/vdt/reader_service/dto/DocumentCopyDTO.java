@@ -1,4 +1,4 @@
-package com.vdt.document_service.dto;
+package com.vdt.reader_service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,6 +18,6 @@ public class DocumentCopyDTO {
     private String documentId;
 
     private String location;
-
+    
     private String status;
 }

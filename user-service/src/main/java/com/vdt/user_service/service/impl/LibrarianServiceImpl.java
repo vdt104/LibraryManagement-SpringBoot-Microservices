@@ -1,5 +1,6 @@
 package com.vdt.user_service.service.impl;
 
+import com.vdt.user_service.response.UserResponse;
 import com.vdt.user_service.dto.LibrarianDTO;
 import com.vdt.user_service.entity.Librarian;
 import com.vdt.user_service.entity.Role;
@@ -8,7 +9,6 @@ import com.vdt.user_service.exception.EmailAlreadyExistsException;
 import com.vdt.user_service.mapper.LibrarianMapper;
 import com.vdt.user_service.repository.LibrarianRepository;
 import com.vdt.user_service.repository.UserRepository;
-import com.vdt.user_service.response.UserResponse;
 import com.vdt.user_service.service.LibrarianService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -36,7 +36,6 @@ public class UserDTO {
     @NotBlank(message = "Email is required")
     private String email;
 
-    @JsonIgnore
     private String password;
 
     @JsonProperty("retype_password")
@@ -44,10 +43,8 @@ public class UserDTO {
     private String retypePassword;
 
     @JsonProperty("role_id")
-    @JsonIgnore
     private Long roleId;
 
     @JsonProperty("is_active")
-    @JsonIgnore
     private boolean isActive;
 }

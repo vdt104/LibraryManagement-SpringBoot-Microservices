@@ -20,6 +20,7 @@ public class ReaderCardMapper {
     public static ReaderCard toEntity(ReaderCardDTO readerCardDTO) {
         ReaderCard readerCard = new ReaderCard();
 
+        readerCard.setUserId(readerCardDTO.getUserId());
         readerCard.setPin(readerCardDTO.getPin());
         readerCard.setIssueDate(readerCardDTO.getIssueDate());
         readerCard.setExpiryPeriod(readerCardDTO.getExpiryPeriod());

@@ -1,13 +1,15 @@
-package com.vdt.user_service.controller;
+package com.vdt.reader_service.controller;
 
-import com.vdt.user_service.dto.ReaderDTO;
-import com.vdt.user_service.response.UserResponse;
-import com.vdt.user_service.service.ReaderService;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.vdt.reader_service.dto.ReaderDTO;
+import com.vdt.reader_service.response.UserResponse;
+import com.vdt.reader_service.service.ReaderService;
 
 import java.util.List;
 

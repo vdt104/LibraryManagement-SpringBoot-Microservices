@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserDTO {
 
     @JsonProperty("full_name")
@@ -44,10 +46,8 @@ public class UserDTO {
     private String retypePassword;
 
     @JsonProperty("role_id")
-    @JsonIgnore
     private Long roleId;
 
     @JsonProperty("is_active")
-    @JsonIgnore
     private boolean isActive;
 }
