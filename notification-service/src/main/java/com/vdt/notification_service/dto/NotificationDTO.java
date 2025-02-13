@@ -13,8 +13,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class NotificationDTO {
-    @JsonProperty("user_id")
-    private String userId;
+    @JsonProperty("created_by")
+    private String createdBy;
+
+    @JsonProperty("consume_by")
+    private String consumeBy;
 
     private String message;
 

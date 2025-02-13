@@ -7,6 +7,8 @@ import com.vdt.user_service.dto.UserDTO;
 public interface UserService {
     List<UserDTO> getAllUsers();
 
+    List<String> getAllLibrariansId();
+
     UserDTO getUserByEmail(String userEmail);
 
     UserDTO getUserById(String userId);

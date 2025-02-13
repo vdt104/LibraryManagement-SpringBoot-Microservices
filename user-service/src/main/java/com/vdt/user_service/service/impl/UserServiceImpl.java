@@ -3,6 +3,7 @@ package com.vdt.user_service.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,15 @@ public class UserServiceImpl implements UserService {
         }
 
         return userDTOs;
+    }
+
+    @Override
+    public List<String> getAllLibrariansId() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .filter(user -> user.getRole().getName().equals("LIBRARIAN"))
+                .map(User::getId)
+                .collect(Collectors.toList());
     }
 
     @Override

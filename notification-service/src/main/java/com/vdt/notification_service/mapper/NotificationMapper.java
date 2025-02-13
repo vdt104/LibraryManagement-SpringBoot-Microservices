@@ -8,7 +8,8 @@ public class NotificationMapper {
     public static NotificationDTO toDTO(Notification notification) {
         NotificationDTO notificationDTO = new NotificationDTO();
 
-        notificationDTO.setUserId(notification.getUserId());
+        notificationDTO.setConsumeBy(notification.getConsumeBy());
+        notificationDTO.setCreatedBy(notification.getCreatedBy());
         notificationDTO.setMessage(notification.getMessage());
         notificationDTO.setRead(notification.getIsRead());
 
@@ -18,7 +19,8 @@ public class NotificationMapper {
     public static Notification toEntity(NotificationDTO notificationDTO) {
         Notification notification = new Notification();
 
-        notification.setUserId(notificationDTO.getUserId());
+        notification.setConsumeBy(notificationDTO.getConsumeBy());
+        notification.setCreatedBy(notificationDTO.getCreatedBy());
         notification.setMessage(notificationDTO.getMessage());
         notification.setIsRead(notificationDTO.isRead());
 

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "notification")
 @Getter
@@ -18,9 +19,14 @@ public class Notification {
     @Id
     private String id;
 
-    private String userId;
+    @Field("created_by")
+    private String createdBy;
+
+    @Field("consume_by")
+    private String consumeBy;
 
     private String message;
 
+    @Field("is_read")
     private Boolean isRead;
 }

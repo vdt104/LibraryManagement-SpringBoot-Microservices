@@ -32,6 +32,12 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @GetMapping("/librarians/id")
+    public ResponseEntity<List<String>> getAllLibrariansId() {
+        List<String> librarianIds = userService.getAllLibrariansId();
+        return new ResponseEntity<>(librarianIds, HttpStatus.OK);
+    }
+
     @GetMapping("/user_id")
     public ResponseEntity<UserDTO> getUserById(@RequestParam("value") String userId) {
         UserDTO user = userService.getUserById(userId);
