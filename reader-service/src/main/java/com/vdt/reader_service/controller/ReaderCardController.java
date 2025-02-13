@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,8 +21,8 @@ public class ReaderCardController {
 
     private final ReaderCardService readerCardService;
 
-    @GetMapping("/{readers}/{readers_id}")
-    public ResponseEntity<ReaderCardDTO> getReaderCardByReaderId(@PathVariable("readers_id") String readersId) {
+    @GetMapping
+    public ResponseEntity<ReaderCardDTO> getReaderCardByReaderId(@RequestParam("readers_id") String readersId) {
         ReaderCardDTO readerCard = readerCardService.getReaderCardByReaderId(readersId);
         return new ResponseEntity<>(readerCard, HttpStatus.OK);
     }

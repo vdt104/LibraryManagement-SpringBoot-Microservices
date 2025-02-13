@@ -8,7 +8,7 @@ public class ReaderRequestMapper {
     public static ReaderRequestDTO toDTO(ReaderRequest readerRequest) {
         ReaderRequestDTO readerRequestDto = new ReaderRequestDTO();
 
-        readerRequestDto.setUserId(readerRequest.getReader().getUserId());
+        readerRequestDto.setUserId(readerRequest.getUserId());
         readerRequestDto.setStatus(readerRequest.getStatus().name());
         readerRequestDto.setDateBorrowed(readerRequest.getDateBorrowed());
         readerRequestDto.setBorrowingPeriod(readerRequest.getBorrowingPeriod());
@@ -22,6 +22,7 @@ public class ReaderRequestMapper {
     public static ReaderRequest toEntity(ReaderRequestDTO readerRequestDto) {
         ReaderRequest readerRequest = new ReaderRequest();
 
+        readerRequest.setUserId(readerRequestDto.getUserId());
         readerRequest.setStatus(ReaderRequest.Status.valueOf(readerRequestDto.getStatus()));
         readerRequest.setDateBorrowed(readerRequestDto.getDateBorrowed());
         readerRequest.setBorrowingPeriod(readerRequestDto.getBorrowingPeriod());

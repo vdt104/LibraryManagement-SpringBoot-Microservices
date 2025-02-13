@@ -33,6 +33,19 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ReaderCardNotActiveException.class)
+    public ResponseEntity<ErrorDetails> handleReaderCardNotActiveException(ReaderCardNotActiveException exception,
+                                                                           WebRequest webRequest) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                webRequest.getDescription(false),
+                "READER_CARD_IS_NOT_ACTIVE"
+        );
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
 //    @ExceptionHandler(EmailAlreadyExistsException.class)
 //    public ResponseEntity<ErrorDetails> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception,
 //                                                                          WebRequest webRequest) {

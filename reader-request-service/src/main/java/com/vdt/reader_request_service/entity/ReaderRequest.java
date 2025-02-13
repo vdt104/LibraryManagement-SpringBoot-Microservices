@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "reader_request")
 @Getter
@@ -22,9 +24,13 @@ public class ReaderRequest {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Reader reader;
+    // @ManyToOne
+    // @JoinColumn(name = "user_id", nullable = false)
+    // private Reader reader;
+
+    @Column(name = "user_id", nullable = false)
+    @JsonProperty("user_id")
+    private String userId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -47,13 +53,18 @@ public class ReaderRequest {
     @Column(name = "notes")
     private String notes;
 
-    @ManyToMany
-    @JoinTable(
-            name = "reader_request_detail",
-            joinColumns = @JoinColumn(name = "reader_request_id"),
-            inverseJoinColumns = @JoinColumn(name = "document_copy_code")
-    )
-    private Set<DocumentCopy> documentCopies;
+    // @ManyToMany
+    // @JoinTable(
+    //         name = "reader_request_detail",
+    //         joinColumns = @JoinColumn(name = "reader_request_id"),
+    //         inverseJoinColumns = @JoinColumn(name = "document_copy_code")
+    // )
+    // private Set<DocumentCopy> documentCopies;
+
+    @ElementCollection
+    @CollectionTable(name = "reader_request_detail", joinColumns = @JoinColumn(name = "reader_request_id"))
+    @Column(name = "document_copy_code")
+    private Set<String> documentCopyCodes;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

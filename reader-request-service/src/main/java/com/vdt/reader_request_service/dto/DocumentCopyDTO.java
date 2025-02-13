@@ -1,6 +1,5 @@
 package com.vdt.reader_request_service.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ public class DocumentCopyDTO {
     private String code;
 
     @JsonProperty("document_id")
-    @JsonIgnore
     private String documentId;
 
     private String location;

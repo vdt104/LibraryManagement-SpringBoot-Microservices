@@ -196,16 +196,18 @@ public class ReaderServiceImpl implements ReaderService {
             if (readerCard.getIssueDate() == null) {
                 readerCard.setIssueDate(new Date());
             }
+
+            restTemplate.put("http://user-service/api/v1/users/" + userId + "/password?action=change", password);
         }
 
-        if (readerCard.getStatus().equals("REQUESTED")) {
+        if (readerCard.getStatus().equals(ReaderCard.Status.REQUESTED)) {
             readerCard.setStatus(ReaderCard.Status.ACTIVE);
         }
 
         readerCardRepository.save(readerCard);
 
         restTemplate.put("http://user-service/api/v1/users/" + userId + "/is_active?boolean=true", null);
-        restTemplate.put("http://user-service/api/v1/users/" + userId + "/password?action=change", password);
+
 
 
         // restTemplate.put("http://user-service/api/v1/users/password/" + userId, null);

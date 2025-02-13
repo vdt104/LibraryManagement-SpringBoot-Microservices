@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vdt.document_service.dto.DocumentCopyDTO;
@@ -33,9 +34,15 @@ public class DocumentCopyController {
     }
 
     @GetMapping("/{document_code}")
-    public ResponseEntity<List<DocumentCopyDTO>> getDocumentCopy(@PathVariable("document_code") String documentCode) {
+    public ResponseEntity<List<DocumentCopyDTO>> getAllDocumentCopyByDocumentCode(@PathVariable("document_code") String documentCode) {
         List<DocumentCopyDTO> documentCopies = documentCopyService.getAllDocumentCopiesOfDocument(documentCode);
         return new ResponseEntity<>(documentCopies, HttpStatus.OK);
+    }
+
+    @GetMapping()
+    public ResponseEntity<DocumentCopyDTO> getDocumentCopyByDocumentCopyCode(@RequestParam("document_copy_code") String documentCopyCode) {
+        DocumentCopyDTO documentCopy = documentCopyService.getDocumentCopyByDocumentCopyCode(documentCopyCode);
+        return new ResponseEntity<>(documentCopy, HttpStatus.OK);
     }
 
     @PostMapping("/{document_id}")

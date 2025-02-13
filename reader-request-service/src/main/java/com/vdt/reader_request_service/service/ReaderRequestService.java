@@ -15,5 +15,5 @@ public interface ReaderRequestService {
 
     ReaderRequestDTO returnReaderRequest(String id, ReaderRequestDTO readerRequestDto);
 
-    ReaderRequestDTO cancelReaderRequest(String id, ReaderRequestDTO readerRequestDto);
+    ReaderRequestDTO cancelReaderRequest(String id);
 }

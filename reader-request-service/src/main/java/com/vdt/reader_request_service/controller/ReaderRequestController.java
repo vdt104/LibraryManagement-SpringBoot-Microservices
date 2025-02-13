@@ -53,8 +53,8 @@ public class ReaderRequestController {
     }
 
     @PutMapping("/{id}/action=cancel")
-    public ResponseEntity<ReaderRequestDTO> cancelReaderRequest(@PathVariable("id") String id, @Valid @RequestBody ReaderRequestDTO readerRequestDto) {
-        ReaderRequestDTO updatedReaderRequest = readerRequestService.cancelReaderRequest(id, readerRequestDto);
+    public ResponseEntity<ReaderRequestDTO> cancelReaderRequest(@PathVariable("id") String id) {
+        ReaderRequestDTO updatedReaderRequest = readerRequestService.cancelReaderRequest(id);
         return new ResponseEntity<>(updatedReaderRequest, HttpStatus.OK);
     }
 }

@@ -69,6 +69,25 @@ public class DocumentCopyServiceImpl implements DocumentCopyService {
     }
 
     @Override
+    public DocumentCopyDTO getDocumentCopyByDocumentCopyCode(String documentCopyCode) {
+        // Kiểm tra xem documentCopyCode có tồn tại hay không
+        Optional<DocumentCopy> documentCopyOptional = documentCopyRepository.findByDocumentCopyCode(documentCopyCode);
+        if (!documentCopyOptional.isPresent()) {
+            throw new ResourceNotFoundException("Document Copy", "document_copy", documentCopyCode);
+        }
+        DocumentCopy documentCopy = documentCopyOptional.get();
+
+        // Chuyển đổi DocumentCopy sang DocumentCopyDto
+        DocumentCopyDTO documentCopyDto = new DocumentCopyDTO();
+        documentCopyDto.setCode(documentCopyCode);
+        documentCopyDto.setDocumentId(documentCopy.getDocument().getDocumentCode());
+        documentCopyDto.setLocation(documentCopy.getLocation());
+        documentCopyDto.setStatus(documentCopy.getStatus().name());
+        
+        return documentCopyDto;
+    }
+
+    @Override
     public DocumentCopyDTO createDocumentCopy(String documentId, DocumentCopyDTO documentCopyDto) {
         // Kiểm tra xem documentId có tồn tại hay không
         Optional<Document> documentOptional = documentRepository.findById(documentId);
